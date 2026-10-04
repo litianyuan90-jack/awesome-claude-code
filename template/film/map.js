@@ -304,6 +304,9 @@ export function buildMap(geo, style = {}) {
       const [tx, tz] = xz(at);
       const tgt = new THREE.Vector3(tx, yAt(tx, tz), tz);
       const pr = THREE.MathUtils.degToRad(pitch), yr = THREE.MathUtils.degToRad(yaw);
+      // far plane follows the distance: a portrait frame that fits a whole country pulls the camera
+      // back further than the map is wide, and a fixed far plane would clip the map to black
+      camera.far = Math.max(6000, w * 2.5, d * 3);
       camera.aspect = VIEW.aspect; camera.updateProjectionMatrix();
       camera.position.set(tgt.x + Math.sin(yr) * Math.cos(pr) * d, tgt.y + Math.sin(pr) * d, tgt.z + Math.cos(yr) * Math.cos(pr) * d);
       camera.lookAt(tgt);

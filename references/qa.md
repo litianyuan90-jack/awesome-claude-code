@@ -16,7 +16,8 @@ python3 scripts/film.py qa --frames --only ceylon africa    # 只查这几帧
 | `facts without a source` | 补来源；真没核到就写「未单独核对链接」并在交付时告诉用户 |
 | `shot “x” has no renderer in scenes/…` | `film.json` 里的镜头 id 在场景文件的 `shots` 里没有同名函数 |
 | `only 0.8s long — too short to read` | 镜头或标注太短，挪切点 |
-| `subtitle too long` | 把这句旁白在标点处拆成两句 |
+| `subtitle too long`（横屏）/ `subtitle runs to 3+ lines in portrait` / `subtitle wraps onto two lines in portrait` | 把这句旁白在标点处拆成两句。竖屏一行约放 16 个汉字 |
+| `none of the requested Chinese serif fonts is installed` | 装思源宋体：`apt install fonts-noto-cjk`，或把 Noto Serif CJK SC 的 OTF 放进 `~/.fonts` 后 `fc-cache -f`。不装字幕会回落成黑体，甚至显示成方框 |
 | `over the x limit of 140s` | X 普通账号最长 2 分 20 秒，见 `delivery.md` |
 | `timeline is a DRY run` | 还没真配音，渲染前跑 `film.py audio` |
 | `film.json was edited after the timeline was built`（错误） | 镜头、地图取景、标注是在 `film.py audio` 时解析进时间轴的。改了 `film.json` 之后要再跑一次 `film.py audio`（已合成的句子走缓存，不花钱），否则预览和渲染用的还是旧值 |

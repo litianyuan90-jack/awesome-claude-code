@@ -28,7 +28,8 @@
   "cover": { "title": "郑和下西洋", "sub": "1405 — 1433 · 七下西洋", "note": "8 站 · 全片代码实时渲染",
              "duration": 1.2, "map": { … } },         // 片头封面，见下
   "style": { "route": "#f0b84a", "sea": true, "ramp": "warm" },   // 可选：覆盖叠层和地图的颜色、字体；地图样式见下
-  "subtitleMaxChars": 24, "musicLevel": 0.62, "ambienceLevel": 0.30, "musicSeed": 1405
+  "subtitleMaxChars": 24,          // 一条字幕最多几个字（在标点处拆开）。默认横屏 24、竖屏 16（竖屏一行约放 16 个汉字）
+  "musicLevel": 0.62, "ambienceLevel": 0.30, "musicSeed": 1405
 }
 ```
 
@@ -129,7 +130,7 @@
   "stamp": { "place": "福建 · 长乐" },      // 覆盖帧的 stamp（可只改某几项）
   "music": { "mood": "calm", "chord": "Bb", "level": 0.8 },
   "ambience": ["lake", "night"],
-  "card": { "title": "郑和下西洋", "sub": "1405 — 1433", "a": "cue:2+0.2", "b": "end" } }   // 居中大标题卡（片尾用）
+  "card": { "title": "郑和下西洋", "sub": "1405 — 1433", "a": "cue:2+0.2", "b": "end" } }   // 居中大标题卡（片尾用）。title 里写 \n 可以换行，竖屏的长片名用它（"南明\n十八年"），meta.cover.title 同理
 ```
 
 带 `"map": {…}` 的就是地图镜头，不需要场景代码。镜头不足 1 秒会被检查脚本警告（看不清）。

@@ -15,7 +15,7 @@ python3 scripts/film.py score         # 只重做配乐和环境声（改了情�
 | 字段 | 含义 |
 |---|---|
 | `provider` | 用什么合成，见下面「配音从哪来」。默认 `"auto"` |
-| `id` | 音色名，各家不同（`say` 默认 `Tingting`，`edge` 默认 `zh-CN-XiaoxiaoNeural`） |
+| `id` | 音色名，各家不同（`say` 默认 `Tingting`，`edge` 默认 `zh-CN-XiaoxiaoNeural`，`kokoro` 默认 `zm_yunxi`） |
 | `speed` | 合成时的语速，保持 1.0 |
 | `tempo` | 合成后用 ffmpeg 在本地调速（1.08 = 快 8%）。**改节奏改这个**，不用重新合成 |
 | `lead` / `tail` | 每帧配音前后的留白（秒）。画面需要先交代环境就加大 `lead` |
@@ -26,9 +26,10 @@ python3 scripts/film.py score         # 只重做配乐和环境声（改了情�
 
 | `provider` | 是什么 | 备注 |
 |---|---|---|
-| `auto`（默认） | 装了 `edge-tts` 就用它，否则在 macOS 上用 `say` | 不用配置就能出声 |
+| `auto`（默认） | 装了 `edge-tts` 就用它，否则在 macOS 上用 `say`，再否则用 `kokoro` | 不用配置就能出声。`edge-tts` 被服务拒绝（云服务器上常见）时自动改用 `kokoro` |
 | `say` | macOS 自带的语音 | 免费、离线，机器味重——够排片和出第一版 |
-| `edge` | 命令行工具 `edge-tts`（要自己 `pip install edge-tts`） | 这条路径作者没有实测过 |
+| `edge` | 命令行工具 `edge-tts`（要自己 `pip install edge-tts`） | 这条路径作者没有实测过；在云服务器上常被拒绝（403） |
+| `kokoro` | 本地开源模型 Kokoro-82M：`pip install kokoro-onnx soundfile "misaki[zh]"` | 免费、离线、任何系统可用。第一次用时下载约 350 MB 模型到 `~/.cache/code-doc-film/kokoro`。中文音色 `zm_yunxi`（男）、`zm_yunjian`、`zf_xiaobei`（女）等。语气偏平，够出第一版 |
 | `command` | 任意命令行：`"command": "mytts --voice x --out {out} \"{text}\""` | `{text}` 是一句旁白，`{out}` 是要写出的音频文件 |
 | 自己的名字 | 在 `~/.config/code-doc-film/` 放一个 `tts_<名字>.py`，里面写 `synth(text, voice, out_path)` | 付费的云端声音和它的密钥放这里，不要放进工程 |
 

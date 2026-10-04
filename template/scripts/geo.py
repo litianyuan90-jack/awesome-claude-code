@@ -11,6 +11,8 @@ from pathlib import Path
 CACHE = Path(os.environ.get('CODE_DOC_FILM_CACHE', Path.home() / '.cache' / 'code-doc-film'))
 TILE_URL = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'
 RIVERS_URL = 'https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip'
+# the same public-domain files in Natural Earth's own GitHub repository — used when naciscdn.org is unreachable
+RIVERS_MIRROR = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/10m_physical/ne_10m_rivers_lake_centerlines.{ext}'
 
 
 def tile_xy(lon, lat, z):
@@ -91,7 +93,8 @@ def build(film, P, download=False):
         if need:
             print(f'  · {len(need)} terrain tiles, about {len(need) * 0.08:.1f} MB — AWS Terrain Tiles (open data), zoom {z}: {TILE_URL.format(z=z, x="x", y="y")}')
         if need_rivers:
-            print(f'  · ne_10m_rivers_lake_centerlines.zip, about 2 MB — Natural Earth (public domain): {RIVERS_URL}')
+            print(f'  · ne_10m_rivers_lake_centerlines, about 2 MB zipped — Natural Earth (public domain): {RIVERS_URL}')
+            print(f'    (falls back to the same files on GitHub if that host is unreachable: {RIVERS_MIRROR.format(ext="shp|dbf|shx")})')
         return
     if need:
         from concurrent.futures import ThreadPoolExecutor
@@ -101,9 +104,17 @@ def build(film, P, download=False):
         print(f'downloaded {len(need)} terrain tiles, {got / 1e6:.1f} MB')
     if need_rivers:
         zp = CACHE / 'ne' / 'rivers.zip'
-        fetch(RIVERS_URL, zp)
-        zipfile.ZipFile(zp).extractall(CACHE / 'ne')
+        try:
+            fetch(RIVERS_URL, zp)
+            zipfile.ZipFile(zp).extractall(CACHE / 'ne')
+        except (SystemExit, zipfile.BadZipFile) as e:
+            print(f'{RIVERS_URL} failed ({str(e).splitlines()[0]}) — trying the copy in Natural Earth\'s GitHub repository')
+            for ext in ('shp', 'dbf', 'shx'):
+                fetch(RIVERS_MIRROR.format(ext=ext), CACHE / 'ne' / f'ne_10m_rivers_lake_centerlines.{ext}')
     W, H = (x1 - x0 + 1) * 256, (y1 - y0 + 1) * 256
+    if film.get('meta', {}).get('aspect') == '9:16' and H < W * 1.25:
+        print(f'⚠ portrait film, but the map area is only {W}×{H} px: a 9:16 shot that shows most of the map will '
+              f'see past its top and bottom edges. Extend geo.bbox north/south, or raise meta.style.edgeFade (e.g. 0.2) so the edges fade out.')
     img = Image.new('RGB', (W, H))
     for x, y in tiles:
         img.paste(Image.open(CACHE / 'terrarium' / str(z) / f'{x}_{y}.png').convert('RGB'), ((x - x0) * 256, (y - y0) * 256))

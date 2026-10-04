@@ -29,7 +29,7 @@ const css = (st) => `
 #ov .pin.river .t { color:#9fb9c2; font-style:italic; letter-spacing:.3em; font-size:26px; }
 #ov .pin.river .l, #ov .pin.nudged .l { display:none; }
 #ov .card { position:absolute; left:0; right:0; top:360px; text-align:center; }
-#ov .card .t { font-size:150px; font-weight:900; letter-spacing:.3em; text-shadow:0 6px 40px rgba(0,0,0,.7); margin-left:.3em; }
+#ov .card .t { font-size:150px; font-weight:900; letter-spacing:.3em; text-shadow:0 6px 40px rgba(0,0,0,.7); margin-left:.3em; white-space:pre-line; }
 #ov .card .s { font-size:38px; letter-spacing:.5em; color:${st.gold}; margin-top:26px; margin-left:.5em; }
 #ov .card .r { width:420px; height:1px; margin:30px auto 0; background:${st.goldLine}; }
 #ov .card .n { font-size:30px; letter-spacing:.35em; opacity:.85; margin-top:34px; margin-left:.35em; }
@@ -50,7 +50,7 @@ const css = (st) => `
 #ov.portrait .stamp .date { font-size:32px; } #ov.portrait .stamp .place { font-size:30px; }
 #ov.portrait .callout { right:64px; top:560px; }
 #ov.portrait .callout .num { font-size:150px; } #ov.portrait .callout.small .num { font-size:104px; }
-#ov.portrait .sub { left:70px; right:70px; bottom:360px; font-size:56px; white-space:normal; line-height:1.35; }
+#ov.portrait .sub { left:70px; right:70px; bottom:360px; font-size:56px; white-space:normal; line-height:1.35; text-wrap:balance; }
 #ov.portrait .progress { left:64px; bottom:auto; top:150px; }
 #ov.portrait .progress i { width:18px; }
 #ov.portrait .card { top:660px; } #ov.portrait .card .t { font-size:170px; }

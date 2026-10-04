@@ -31,6 +31,12 @@ def load():
     return json.loads(f.read_text())
 
 
+# HyperFrames cancels a render when any ancestor process exits (render_cancelled_parent_exited).
+# A render started from a background job, nohup/setsid, a remote agent or CI then dies a few seconds
+# in. film.py waits for its renders itself, so it tells HyperFrames not to watch its ancestors.
+os.environ.setdefault('HYPERFRAMES_RENDER_DETACHED', '1')
+
+
 def sh(cmd, **kw):
     return subprocess.run(cmd, check=True, **kw)
 
@@ -79,8 +85,12 @@ def cmd_cues(film, args):
 # ── TTS providers ────────────────────────────────────────────────────────────
 # Built in:  say      macOS system voice (free, offline, robotic — fine for a first cut)
 #            edge     the edge-tts command line tool, if you have installed it
+#            kokoro   Kokoro-82M, a local open model (free, offline, any OS; reads Chinese numbers and
+#                     polyphones well with misaki's G2P): pip install kokoro-onnx soundfile "misaki[zh]"
 #            command  any CLI: voice.command is a shell template with {text} and {out}
-#            auto     edge if edge-tts is on PATH, else say on macOS (the default)
+#            auto     edge if edge-tts is on PATH, else say on macOS, else kokoro (the default).
+#                     If edge-tts is installed but its service refuses (it often blocks cloud and
+#                     datacenter addresses), auto switches to kokoro for the rest of the run.
 # Your own:  put  tts_<name>.py  in ~/.config/code-doc-film/ (or $CODE_DOC_FILM_HOME) with a function
 #            synth(text, voice, out_path)  that writes an audio file; then use "provider": "<name>".
 #            That is where a paid cloud voice and its credentials belong — never in the project.
@@ -89,29 +99,103 @@ CONFIG_HOME = Path(os.environ.get('CODE_DOC_FILM_HOME', Path.home() / '.config' 
 
 def tts_say(text, voice, out_mp3):
     if sys.platform != 'darwin' or not shutil.which('say'):
-        raise SystemExit('voice provider "say" needs macOS. Set meta.voice.provider to "edge", "command" or your own plug-in (see references/audio.md).')
+        raise SystemExit('voice provider "say" needs macOS. Set meta.voice.provider to "kokoro", "edge", "command" or your own plug-in (see references/audio.md).')
     aiff = Path(str(out_mp3) + '.aiff')
     sh(['say', '-v', voice.get('id') or 'Tingting', '-r', str(round(175 * voice.get('speed', 1.0))), '-o', str(aiff), text])
     sh(['ffmpeg', '-v', 'error', '-y', '-i', str(aiff), str(out_mp3)])
     aiff.unlink()
 
 
-def tts_edge(text, voice, out_mp3):
+def tts_edge(text, voice, out_mp3, **kw):
     if not shutil.which('edge-tts'):
         raise SystemExit('voice provider "edge" needs the edge-tts command (pip install edge-tts).')
     pct = round((voice.get('speed', 1.0) - 1) * 100)
-    sh(['edge-tts', '--voice', voice.get('id') or 'zh-CN-XiaoxiaoNeural', f'--rate={pct:+d}%', '--text', text, '--write-media', str(out_mp3)])
+    sh(['edge-tts', '--voice', voice.get('id') or 'zh-CN-XiaoxiaoNeural', f'--rate={pct:+d}%', '--text', text, '--write-media', str(out_mp3)], **kw)
+
+
+# Kokoro model files: looked up in ~/.config/code-doc-film/kokoro, ~/.cache/code-doc-film/kokoro and the
+# HyperFrames tts cache; downloaded once (≈ 350 MB) into ~/.cache/code-doc-film/kokoro when missing.
+KOKORO_URL = 'https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/'
+KOKORO_FILES = ('kokoro-v1.0.onnx', 'voices-v1.0.bin')
+_kokoro = {}
+
+
+def kokoro_available():
+    import importlib.util
+    return importlib.util.find_spec('kokoro_onnx') is not None
+
+
+def kokoro_model():
+    if 'k' in _kokoro:
+        return _kokoro['k'], _kokoro['g']
+    if not kokoro_available():
+        raise SystemExit('voice provider "kokoro" needs: pip install kokoro-onnx soundfile "misaki[zh]"')
+    hf = Path.home() / '.cache' / 'hyperframes' / 'tts'
+    dirs = [CONFIG_HOME / 'kokoro', Path.home() / '.cache' / 'code-doc-film' / 'kokoro', hf / 'models', hf / 'voices']
+    paths = []
+    for name in KOKORO_FILES:
+        found = next((d / name for d in dirs if (d / name).exists()), None)
+        if not found:
+            found = dirs[1] / name
+            found.parent.mkdir(parents=True, exist_ok=True)
+            print(f'downloading Kokoro model file {name} (one time) → {found}')
+            sh(['curl', '-fL', '--retry', '3', '-o', str(found) + '.part', KOKORO_URL + name])
+            Path(str(found) + '.part').rename(found)
+        paths.append(str(found))
+    from kokoro_onnx import Kokoro
+    g2p = None
+    try:
+        from misaki import zh
+        g2p = zh.ZHG2P()
+    except Exception:
+        print('⚠ misaki[zh] is not installed — Kokoro falls back to espeak phonemes, which read Chinese poorly. pip install "misaki[zh]"')
+    _kokoro.update(k=Kokoro(*paths), g=g2p)
+    return _kokoro['k'], g2p
+
+
+def tts_kokoro(text, voice, out_mp3):
+    import soundfile
+    k, g2p = kokoro_model()
+    vid = voice.get('id') or 'zm_yunxi'
+    if g2p and vid[:1] == 'z':
+        ph = g2p(text)
+        samples, sr = k.create(ph[0] if isinstance(ph, tuple) else ph, voice=vid, speed=voice.get('speed', 1.0), is_phonemes=True)
+    else:
+        samples, sr = k.create(text, voice=vid, speed=voice.get('speed', 1.0), lang='cmn' if vid[:1] == 'z' else 'en-us')
+    wav = Path(str(out_mp3) + '.wav')
+    soundfile.write(str(wav), samples, sr)
+    sh(['ffmpeg', '-v', 'error', '-y', '-i', str(wav), str(out_mp3)])
+    wav.unlink()
 
 
 def tts_command(text, voice, out_mp3):
     sh(voice['command'].format(text=text.replace('"', '\\"'), out=str(out_mp3)), shell=True)
 
 
+_edge_down = []
+
+
 def tts_auto(text, voice, out_mp3):
-    return (tts_edge if shutil.which('edge-tts') else tts_say)(text, voice, out_mp3)
+    if shutil.which('edge-tts') and not _edge_down:
+        try:
+            return tts_edge(text, voice, out_mp3, capture_output=True, encoding="utf-8")
+        except subprocess.CalledProcessError as e:
+            if not kokoro_available():
+                raise SystemExit('edge-tts failed:\n' + (e.stderr or '').strip()[-600:])
+            last = ((e.stderr or '').strip().splitlines() or ['?'])[-1]
+            print(f'⚠ edge-tts failed ({last[:160]}) — its service often refuses cloud servers. Using the local Kokoro voice for the rest of this run.')
+            _edge_down.append(True)
+    if shutil.which('edge-tts') and _edge_down and kokoro_available():
+        return tts_kokoro(text, {k: v for k, v in voice.items() if k != 'id'}, out_mp3)
+    if sys.platform == 'darwin' and shutil.which('say'):
+        return tts_say(text, voice, out_mp3)
+    if kokoro_available():
+        return tts_kokoro(text, voice, out_mp3)
+    raise SystemExit('no voice available: on Linux/Windows install the local Kokoro voice (pip install kokoro-onnx soundfile "misaki[zh]") '
+                     'or edge-tts, or set meta.voice.provider to "command" / your own plug-in (see references/audio.md).')
 
 
-BUILTIN_TTS = {'auto': tts_auto, 'say': tts_say, 'edge': tts_edge, 'command': tts_command}
+BUILTIN_TTS = {'auto': tts_auto, 'say': tts_say, 'edge': tts_edge, 'kokoro': tts_kokoro, 'command': tts_command}
 
 
 def tts_provider(voice):
@@ -284,7 +368,7 @@ def build_timeline(film, dry):
     audio_dir = P / 'audio'
     audio_dir.mkdir(exist_ok=True)
     W, H = SIZES[meta.get('aspect', '16:9')]
-    max_chars = meta.get('subtitleMaxChars', 24 if W > H else 26)
+    max_chars = meta.get('subtitleMaxChars', 24 if W > H else 16)
     frames, subs, cursor = [], [], 0.0
     cover = meta.get('cover')
     if cover:
@@ -450,6 +534,21 @@ def cmd_index(film, args):
 
 
 # ── QA ────────────────────────────────────────────────────────────────────────
+def font_warnings(meta):
+    """The overlay asks for a Chinese serif (Songti / Noto Serif CJK / Source Han Serif). Without one the browser
+    silently falls back to a sans face (or tofu boxes), and nothing else in the pipeline notices."""
+    if sys.platform == 'darwin' or not shutil.which('fc-list'):
+        return []
+    want = [f.strip().strip('"') for f in meta.get('style', {}).get('font', '"Songti SC","STSong","Noto Serif CJK SC","Noto Serif SC","Source Han Serif SC","SimSun"').split(',')]
+    have = subprocess.run(['fc-list', ':', 'family'], capture_output=True, text=True).stdout
+    if any(f and f != 'serif' and f in have for f in want):
+        return []
+    cjk = subprocess.run(['fc-list', ':lang=zh', 'family'], capture_output=True, text=True).stdout.strip()
+    return [('none of the requested Chinese serif fonts is installed (wanted one of: ' + ', '.join(w for w in want if w != 'serif') + '). Subtitles and titles will '
+             + ('fall back to ' + cjk.splitlines()[0].split(',')[0] if cjk else 'render as empty boxes')
+             + '. Install Noto Serif CJK SC (e.g. apt install fonts-noto-cjk, or the OTFs from github.com/notofonts/noto-cjk into ~/.fonts and run fc-cache).')]
+
+
 def static_checks(film, tl):
     errs, warns = [], []
     meta = film['meta']
@@ -500,10 +599,19 @@ def static_checks(film, tl):
             if c['end'] - c['start'] < 0.9:
                 warns.append(f"{fr['id']}: callout “{c.get('num')}” is on screen for {c['end'] - c['start']:.2f}s")
     W, H = tl['size']
-    limit = 26 if H > W else 24
+    # landscape subtitles sit on one line; in portrait one line holds about 16 full-width characters
+    # (56px over 940px) and longer ones wrap — digits and Latin letters are a little over half as wide
     for s in tl['subs']:
-        if len(s['text']) > limit + 2:
-            warns.append(f"subtitle too long ({len(s['text'])} chars): {s['text']}")
+        if W > H:
+            if len(s['text']) > 26:
+                warns.append(f"subtitle too long ({len(s['text'])} chars): {s['text']}")
+            continue
+        width = sum(0.55 if ord(ch) < 0x2E80 else 1 for ch in s['text'])
+        if width > 32:
+            warns.append(f"subtitle runs to 3+ lines in portrait ({len(s['text'])} chars): {s['text']} — split the cue at a comma")
+        elif width > 16:
+            warns.append(f"subtitle wraps onto two lines in portrait ({len(s['text'])} chars): {s['text']} — shorter lines (≤ 16 characters) read better; split the cue at a comma")
+    warns += font_warnings(meta)
     plat = meta.get('platform', 'x')
     lim = PLATFORM_LIMITS.get(plat)
     if lim and tl['total'] > lim:
