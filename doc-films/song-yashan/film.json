@@ -1,0 +1,1132 @@
+{
+ "meta": {
+  "slug": "song-yashan",
+  "title": "南宋末路",
+  "aspect": "9:16",
+  "platform": "shipinhao",
+  "voice": {
+   "provider": "kokoro",
+   "id": "zm_yunxi",
+   "speed": 1.0,
+   "tempo": 0.94,
+   "lead": 0.4,
+   "tail": 0.75,
+   "gap": 0.3
+  },
+  "progress": {
+   "label": "南逃",
+   "total": 8
+  },
+  "stationFormat": "第 {n} 站 / 共 {total} 站",
+  "style": {
+   "route": "#e0a84a",
+   "route2": "#c9603f",
+   "dot": "#ffd99a",
+   "sea": {
+    "deep": "#0f2433"
+   },
+   "ramp": "warm",
+   "edgeFade": 0.08
+  },
+  "musicSeed": 1279,
+  "cover": {
+   "title": "南宋\n末路",
+   "sub": "1276 — 1279 · 从临安到崖山",
+   "note": "8 站 · 全片代码实时渲染",
+   "duration": 1.2,
+   "map": {
+    "fit": [
+     "临安",
+     "崖山",
+     "泉州"
+    ],
+    "margin": 1.0,
+    "pitch": 62,
+    "yaw": 0,
+    "draw": {
+     "from": "total",
+     "to": "total"
+    },
+    "dots": [
+     "临安",
+     "福州",
+     "崖山"
+    ],
+    "post": {
+     "bloom": 0.9
+    }
+   }
+  }
+ },
+ "geo": {
+  "zoom": 8,
+  "bbox": [
+   111.0,
+   20.6,
+   123.0,
+   31.2
+  ],
+  "riverRank": 6,
+  "places": {
+   "临安": [
+    120.16,
+    30.25
+   ],
+   "婺州": [
+    119.65,
+    29.08
+   ],
+   "温州": [
+    120.65,
+    28.02
+   ],
+   "福州": [
+    119.3,
+    26.08
+   ],
+   "泉州": [
+    118.59,
+    24.91
+   ],
+   "潮州": [
+    116.63,
+    23.66
+   ],
+   "甲子门": [
+    116.07,
+    22.82
+   ],
+   "官富场": [
+    114.19,
+    22.33
+   ],
+   "秀山": [
+    113.67,
+    22.82
+   ],
+   "井澳": [
+    113.52,
+    22.1
+   ],
+   "崖山": [
+    113.08,
+    22.25
+   ]
+  },
+  "routes": {
+   "main": [
+    "临安",
+    [
+     119.95,
+     29.7
+    ],
+    "婺州",
+    [
+     120.1,
+     28.6
+    ],
+    "温州",
+    [
+     121.2,
+     27.8
+    ],
+    [
+     120.6,
+     26.6
+    ],
+    [
+     119.9,
+     26.0
+    ],
+    "福州",
+    [
+     119.75,
+     25.85
+    ],
+    [
+     119.55,
+     25.3
+    ],
+    [
+     119.0,
+     24.75
+    ],
+    "泉州",
+    [
+     118.9,
+     24.4
+    ],
+    [
+     117.8,
+     23.5
+    ],
+    [
+     116.9,
+     23.1
+    ],
+    [
+     116.5,
+     22.7
+    ],
+    "甲子门",
+    [
+     115.4,
+     22.45
+    ],
+    [
+     114.6,
+     22.15
+    ],
+    "官富场",
+    [
+     113.95,
+     22.3
+    ],
+    [
+     113.75,
+     22.6
+    ],
+    "秀山",
+    [
+     113.75,
+     22.35
+    ],
+    "井澳",
+    [
+     113.2,
+     21.95
+    ],
+    "崖山"
+   ]
+  }
+ },
+ "facts": [
+  {
+   "text": "德祐二年（1276年）二月，元军进入临安，南宋朝廷奉表投降（2月4日元军攻占临安，二月初五受降）",
+   "match": [
+    "1276",
+    "2"
+   ],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-hans/临安之战 ；https://www.sohu.com/a/363550457_100028727 （网络受限，未打开原文核对）"
+  },
+  {
+   "text": "临安投降前夜，益王赵昰、广王赵昺在杨镇、杨亮节护送下出城，经婺州（今金华）至温州",
+   "match": [],
+   "source": "搜索摘要：https://www.sohu.com/a/363550457_100028727 （未打开原文核对）"
+  },
+  {
+   "text": "景炎元年（1276年）五月初一，赵昰在福州即位，是为宋端宗",
+   "match": [
+    "1276",
+    "5"
+   ],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-cn/宋端宗 ；https://data.ctext.org/entity/623753 （未打开原文核对）"
+  },
+  {
+   "text": "1276年十一月元军入闽，张世杰护端宗至泉州，提举市舶蒲寿庚闭城拒纳，旋降元",
+   "match": [],
+   "source": "搜索摘要：http://www.mnwhstq.com/szzy/qzrwk/201608/t20160815_84680.htm ；http://www.eeo.com.cn/2025/0324/717993.shtml （未打开原文核对）"
+  },
+  {
+   "text": "流亡朝廷经潮州、惠州甲子门，景炎二年（1277年）至官富场（今香港九龙一带）",
+   "match": [
+    "1277"
+   ],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-tw/宋端宗 ；https://zhuanlan.zhihu.com/p/29702586 （未打开原文核对）"
+  },
+  {
+   "text": "景炎二年十二月，端宗至井澳，遇飓风，舟败，端宗落水，得疾",
+   "match": [],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-tw/宋端宗 ；https://en.wikipedia.org/wiki/Emperor_Duanzong （未打开原文核对）"
+  },
+  {
+   "text": "景炎三年四月（1278年5月），端宗崩于碙洲（碙洲今地有湛江硇洲岛、香港大屿山等说，片中不标位置）；陆秀夫等立赵昺，五月改元祥兴",
+   "match": [
+    "1278",
+    "5"
+   ],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-hans/赵昺 ；https://en.wikipedia.org/wiki/Emperor_Duanzong （未打开原文核对）"
+  },
+  {
+   "text": "祥兴元年六月（1278年6月），赵昺徙居崖山（今广东江门新会崖门）",
+   "match": [
+    "1278",
+    "6"
+   ],
+   "source": "搜索摘要：https://zh.wikipedia.org/zh-hans/赵昺 （未打开原文核对）"
+  },
+  {
+   "text": "张世杰将千余艘战船以大索连为一字阵，四周起楼棚，涂泥以防火攻",
+   "match": [
+    "1000"
+   ],
+   "source": "搜索摘要：https://baike.baidu.com/item/崖山海战/10764308 ；https://www.thepaper.cn/newsDetail_forward_14765761 （未打开原文核对）"
+  },
+  {
+   "text": "文天祥1278年十二月于五坡岭被俘；1279年正月被元军挟持经零丁洋，作《过零丁洋》，末句“人生自古谁无死，留取丹心照汗青”",
+   "match": [
+    "1279"
+   ],
+   "source": "https://www.zhmuseum.org.cn/wen/wenwugushiInfo?id=9 ；https://www.classicalchineseliterature.org/article.php?article=過零丁洋 （搜索摘要，未打开原文核对）"
+  },
+  {
+   "text": "元军封锁海湾，断宋军汲水、樵采之路，宋军食干粮，渴甚",
+   "match": [],
+   "source": "搜索摘要：https://baike.baidu.com/item/崖山海战/10764308 （“饮海水即呕泄”出自《宋史·张世杰传》，未逐字核对，故旁白不用）"
+  },
+  {
+   "text": "祥兴二年二月初六（1279年3月19日），张弘范四面合攻，宋军溃败；陆秀夫负帝昺投海",
+   "match": [
+    "1279",
+    "3",
+    "19"
+   ],
+   "source": "搜索摘要：https://baike.baidu.com/item/崖山海战/10764308 ；https://www.chinanews.com.cn/m/cul/2017/03-19/8177743.shtml （未打开原文核对）"
+  },
+  {
+   "text": "1276年临安降元至1279年崖山之战，约3年",
+   "match": [
+    "3"
+   ],
+   "source": "年份相减：1279 − 1276 = 3"
+  }
+ ],
+ "frames": [
+  {
+   "id": "hook",
+   "scene": "f01_linan",
+   "stamp": {
+    "no": "1276 — 1279",
+    "title": "南宋末路"
+   },
+   "narration": [
+    "1276年2月，元军兵临临安城下，",
+    "南宋朝廷开城投降。",
+    "就在投降前夜，",
+    "两个年幼的皇子，被悄悄送出了城。"
+   ],
+   "shots": [
+    {
+     "id": "city",
+     "until": "cue:2",
+     "in": {
+      "color": "black",
+      "dur": 0.6
+     },
+     "music": {
+      "mood": "swell",
+      "chord": "Dm",
+      "level": 0.7
+     },
+     "ambience": [
+      "wind",
+      "night"
+     ]
+    },
+    {
+     "id": "gate",
+     "in": "cut",
+     "music": {
+      "mood": "tension",
+      "chord": "Gm",
+      "level": 0.7
+     },
+     "ambience": [
+      "night",
+      "wind"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 0,
+     "delay": 0.4,
+     "until": "cue:2",
+     "num": "1276",
+     "unit": "年 · 临安投降"
+    }
+   ]
+  },
+  {
+   "id": "fuzhou",
+   "station": 1,
+   "scene": "f02_fuzhou",
+   "stamp": {
+    "title": "福州",
+    "date": "1276 · 5",
+    "place": "福建 · 福州"
+   },
+   "narration": [
+    "他们一路南下，经婺州到温州，",
+    "再从海路到福州。",
+    "1276年5月，哥哥赵昰在福州即位，",
+    "是为宋端宗。"
+   ],
+   "shots": [
+    {
+     "id": "map",
+     "until": "cue:2",
+     "music": {
+      "mood": "swell",
+      "chord": "F"
+     },
+     "map": {
+      "fit": {
+       "from": [
+        "临安",
+        "婺州",
+        "温州"
+       ],
+       "to": [
+        "临安",
+        "温州",
+        "福州"
+       ]
+      },
+      "margin": 1.1,
+      "pitch": [
+       60,
+       62
+      ],
+      "yaw": [
+       -3,
+       3
+      ],
+      "draw": {
+       "from": "start",
+       "to": "福州",
+       "t": [
+        0.2,
+        "cue:2"
+       ]
+      },
+      "dots": [
+       "临安",
+       "温州",
+       "福州"
+      ],
+      "pins": [
+       {
+        "place": "临安",
+        "a": 0.1
+       },
+       {
+        "place": "婺州",
+        "a": 0.9
+       },
+       {
+        "place": "温州",
+        "a": 1.8
+       },
+       {
+        "place": "福州",
+        "a": "cue:1+0.6"
+       }
+      ]
+     }
+    },
+    {
+     "id": "court",
+     "in": {
+      "color": "mist",
+      "dur": 0.5
+     },
+     "music": {
+      "mood": "calm",
+      "chord": "Bb"
+     },
+     "ambience": [
+      "crowd",
+      "wind"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 2,
+     "delay": 0.6,
+     "until": "end-0.2",
+     "num": "宋端宗",
+     "unit": "1276 年 · 福州即位",
+     "small": true
+    }
+   ]
+  },
+  {
+   "id": "quanzhou",
+   "station": 2,
+   "scene": "f03_quanzhou",
+   "stamp": {
+    "title": "泉州",
+    "date": "1276 · 冬",
+    "place": "福建 · 泉州"
+   },
+   "narration": [
+    "当年冬天，元军攻入福建。",
+    "朝廷乘船南下泉州，",
+    "掌管泉州海港的蒲寿庚却闭城不纳，",
+    "转身投降了元朝。"
+   ],
+   "shots": [
+    {
+     "id": "map",
+     "until": "cue:2",
+     "music": {
+      "mood": "tension",
+      "chord": "Gm",
+      "level": 0.7
+     },
+     "map": {
+      "fit": {
+       "from": [
+        "温州",
+        "福州",
+        "泉州"
+       ],
+       "to": [
+        "福州",
+        "泉州",
+        [
+         117.6,
+         24.2
+        ]
+       ]
+      },
+      "margin": 1.15,
+      "pitch": [
+       60,
+       62
+      ],
+      "yaw": [
+       -3,
+       3
+      ],
+      "draw": {
+       "from": "福州",
+       "to": "泉州",
+       "t": [
+        0.3,
+        "cue:2"
+       ]
+      },
+      "dots": [
+       "福州",
+       "泉州"
+      ],
+      "pins": [
+       {
+        "place": "福州",
+        "a": 0.0
+       },
+       {
+        "place": "泉州",
+        "a": "cue:1+0.4"
+       }
+      ]
+     }
+    },
+    {
+     "id": "gate",
+     "in": {
+      "color": "mist",
+      "dur": 0.5
+     },
+     "music": {
+      "mood": "tension",
+      "chord": "Bb",
+      "level": 0.8
+     },
+     "ambience": [
+      "sea",
+      "wind"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 2,
+     "delay": 0.3,
+     "num": "闭城不纳",
+     "unit": "泉州 · 蒲寿庚",
+     "small": true,
+     "red": true
+    }
+   ]
+  },
+  {
+   "id": "coast",
+   "station": 3,
+   "scene": "f04_coast",
+   "stamp": {
+    "title": "海上朝廷",
+    "date": "1277",
+    "place": "广东沿海"
+   },
+   "narration": [
+    "从此，朝廷只能漂在海上。",
+    "潮州、甲子门，一路沿着海岸往西，",
+    "1277年，船队停在官富场，",
+    "今天香港九龙一带。"
+   ],
+   "shots": [
+    {
+     "id": "fleet",
+     "until": "cue:1",
+     "in": {
+      "color": "black",
+      "dur": 0.5
+     },
+     "music": {
+      "mood": "somber",
+      "chord": "Dm",
+      "level": 0.7
+     },
+     "ambience": [
+      "sea",
+      "sails"
+     ]
+    },
+    {
+     "id": "map",
+     "music": {
+      "mood": "swell",
+      "chord": "F"
+     },
+     "map": {
+      "fit": {
+       "from": [
+        "泉州",
+        "潮州",
+        "甲子门"
+       ],
+       "to": [
+        "潮州",
+        "甲子门",
+        "官富场"
+       ]
+      },
+      "margin": 1.1,
+      "pitch": [
+       60,
+       62
+      ],
+      "yaw": [
+       3,
+       -3
+      ],
+      "draw": {
+       "from": "泉州",
+       "to": "官富场",
+       "t": [
+        0.2,
+        "cue:2+0.6"
+       ]
+      },
+      "dots": [
+       "泉州",
+       "潮州",
+       "甲子门",
+       "官富场"
+      ],
+      "pins": [
+       {
+        "place": "潮州",
+        "a": 0.6
+       },
+       {
+        "place": "甲子门",
+        "a": 1.6
+       },
+       {
+        "place": "官富场",
+        "a": "cue:2+0.2"
+       }
+      ]
+     }
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 3,
+     "num": "官富场",
+     "unit": "今香港九龙一带",
+     "small": true
+    }
+   ]
+  },
+  {
+   "id": "storm",
+   "station": 4,
+   "scene": "f05_storm",
+   "stamp": {
+    "title": "井澳",
+    "date": "1277 · 冬",
+    "place": "珠江口"
+   },
+   "narration": [
+    "这年冬天，船队在井澳遇上飓风。",
+    "船只倾覆，人员四散，",
+    "小皇帝落入海中，",
+    "被救起后，一病不起。"
+   ],
+   "shots": [
+    {
+     "id": "map",
+     "until": "cue:1",
+     "music": {
+      "mood": "tension",
+      "chord": "Gm",
+      "level": 0.7
+     },
+     "map": {
+      "from": {
+       "place": "官富场",
+       "dx": 0,
+       "dz": -20
+      },
+      "to": {
+       "place": "井澳",
+       "dx": 0,
+       "dz": 0
+      },
+      "dist": [
+       300,
+       230
+      ],
+      "pitch": [
+       58,
+       62
+      ],
+      "yaw": [
+       -3,
+       4
+      ],
+      "draw": {
+       "from": "官富场",
+       "to": "井澳",
+       "t": [
+        0.2,
+        2.6
+       ]
+      },
+      "dots": [
+       "官富场",
+       "秀山",
+       "井澳"
+      ],
+      "pins": [
+       {
+        "place": "秀山",
+        "a": 0.8
+       },
+       {
+        "place": "井澳",
+        "a": 1.8
+       },
+       {
+        "ll": [
+         113.75,
+         22.42
+        ],
+        "text": "珠江口",
+        "kind": "river",
+        "a": 0.4
+       }
+      ]
+     }
+    },
+    {
+     "id": "storm",
+     "in": "cut",
+     "music": {
+      "mood": "battle",
+      "chord": "Dm",
+      "level": 0.8
+     },
+     "ambience": [
+      "sea",
+      "surf",
+      "rain",
+      "wind"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "yashan",
+   "station": 5,
+   "scene": "f06_yashan",
+   "stamp": {
+    "title": "崖山",
+    "date": "1278 · 6",
+    "place": "广东 · 江门新会"
+   },
+   "narration": [
+    "1278年5月，端宗病逝。",
+    "大臣们又拥立他年幼的弟弟赵昺，",
+    "6月，朝廷退守崖山。",
+    "张世杰把1000多艘战船用绳索连成一线，",
+    "背靠大山，准备死守。"
+   ],
+   "shots": [
+    {
+     "id": "dusk",
+     "until": "cue:1",
+     "in": {
+      "color": "black",
+      "dur": 0.6
+     },
+     "music": {
+      "mood": "somber",
+      "chord": "Am",
+      "level": 0.7
+     },
+     "ambience": [
+      "sea"
+     ]
+    },
+    {
+     "id": "map",
+     "until": "cue:3",
+     "in": "cut",
+     "music": {
+      "mood": "swell",
+      "chord": "Dm"
+     },
+     "map": {
+      "from": {
+       "place": "井澳",
+       "dx": 10,
+       "dz": -10
+      },
+      "to": {
+       "place": "崖山",
+       "dx": 0,
+       "dz": 0
+      },
+      "dist": [
+       280,
+       200
+      ],
+      "pitch": [
+       58,
+       62
+      ],
+      "yaw": [
+       3,
+       -4
+      ],
+      "draw": {
+       "from": "井澳",
+       "to": "崖山",
+       "t": [
+        0.2,
+        2.2
+       ]
+      },
+      "dots": [
+       "井澳",
+       "崖山"
+      ],
+      "pins": [
+       {
+        "place": "崖山",
+        "a": 1.4
+       }
+      ]
+     }
+    },
+    {
+     "id": "chain",
+     "in": {
+      "color": "mist",
+      "dur": 0.4
+     },
+     "music": {
+      "mood": "tension",
+      "chord": "Gm",
+      "level": 0.8
+     },
+     "ambience": [
+      "sea",
+      "sails"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 3,
+     "until": "end-0.3",
+     "num": "1000+",
+     "unit": "艘战船 · 连成一线"
+    }
+   ]
+  },
+  {
+   "id": "lingding",
+   "station": 6,
+   "scene": "f07_lingding",
+   "stamp": {
+    "title": "零丁洋",
+    "date": "1279 · 正月",
+    "place": "珠江口外"
+   },
+   "narration": [
+    "1279年初，元军张弘范率水师南下。",
+    "被俘的文天祥被押在元军船上，",
+    "经过零丁洋时，他写下：",
+    "人生自古谁无死，留取丹心照汗青。"
+   ],
+   "shots": [
+    {
+     "id": "fleet",
+     "until": "cue:2",
+     "in": {
+      "color": "black",
+      "dur": 0.5
+     },
+     "music": {
+      "mood": "tension",
+      "chord": "Gm",
+      "level": 0.7
+     },
+     "ambience": [
+      "sea",
+      "wind"
+     ]
+    },
+    {
+     "id": "desk",
+     "in": {
+      "color": "dark",
+      "dur": 0.6
+     },
+     "music": {
+      "mood": "somber",
+      "chord": "Dm",
+      "level": 0.6
+     },
+     "ambience": [
+      "sea",
+      "room"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 3,
+     "delay": 0.3,
+     "until": "end-0.3",
+     "num": "过零丁洋",
+     "unit": "文天祥 · 1279 年",
+     "small": true
+    }
+   ]
+  },
+  {
+   "id": "siege",
+   "station": 7,
+   "scene": "f08_siege",
+   "stamp": {
+    "title": "断水",
+    "date": "1279 · 2",
+    "place": "崖山海湾"
+   },
+   "narration": [
+    "元军封锁了海湾，",
+    "切断宋军取淡水、砍柴的路。",
+    "连成一线的战船，进不能攻，退不能走。"
+   ],
+   "shots": [
+    {
+     "id": "block",
+     "until": "cue:2",
+     "in": {
+      "color": "mist",
+      "dur": 0.5
+     },
+     "music": {
+      "mood": "tension",
+      "chord": "Bb",
+      "level": 0.75
+     },
+     "ambience": [
+      "sea",
+      "wind"
+     ]
+    },
+    {
+     "id": "thirst",
+     "in": "cut",
+     "music": {
+      "mood": "somber",
+      "chord": "Gm",
+      "level": 0.7
+     },
+     "ambience": [
+      "sea",
+      "sails"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fall",
+   "station": 8,
+   "scene": "f09_fall",
+   "tail": 1.6,
+   "stamp": {
+    "title": "崖山之战",
+    "date": "1279 · 3 · 19",
+    "place": "崖山"
+   },
+   "narration": [
+    "1279年3月19日，元军四面合攻，",
+    "宋军阵线被一处处突破。",
+    "眼看大势已去，",
+    "丞相陆秀夫背起小皇帝，跳进了大海。"
+   ],
+   "shots": [
+    {
+     "id": "attack",
+     "until": "cue:2",
+     "in": {
+      "color": "black",
+      "dur": 0.4
+     },
+     "music": {
+      "mood": "battle",
+      "chord": "Dm",
+      "level": 0.9
+     },
+     "ambience": [
+      "sea",
+      "fire",
+      "crowd"
+     ]
+    },
+    {
+     "id": "sea",
+     "in": {
+      "color": "dark",
+      "dur": 0.6
+     },
+     "music": {
+      "mood": "somber",
+      "chord": "Dm",
+      "level": 0.55
+     },
+     "ambience": [
+      "sea"
+     ]
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 0,
+     "until": "cue:2",
+     "num": "1279",
+     "unit": "年 3 月 19 日 · 崖山"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "stamp": false,
+   "narration": [
+    "从临安出逃，到崖山，",
+    "3年。",
+    "一个王朝的最后一程，在海上走完。"
+   ],
+   "shots": [
+    {
+     "id": "map",
+     "in": {
+      "color": "black",
+      "dur": 0.6
+     },
+     "out": {
+      "color": "black",
+      "dur": 1.1
+     },
+     "map": {
+      "fit": [
+       "临安",
+       "崖山",
+       "泉州",
+       "温州"
+      ],
+      "margin": 0.95,
+      "pitch": [
+       60,
+       64
+      ],
+      "yaw": [
+       -3,
+       2
+      ],
+      "draw": {
+       "from": "start",
+       "to": "total",
+       "t": [
+        0.2,
+        3.6
+       ]
+      },
+      "dots": [
+       "临安",
+       "福州",
+       "泉州",
+       "官富场",
+       "崖山"
+      ],
+      "pins": [
+       {
+        "place": "临安",
+        "a": 0.3,
+        "b": "cue:2"
+       },
+       {
+        "place": "崖山",
+        "a": 3.2,
+        "b": "cue:2"
+       }
+      ],
+      "post": {
+       "bloom": 0.9
+      }
+     },
+     "card": {
+      "title": "南宋\n末路",
+      "sub": "1276 — 1279",
+      "a": "cue:2+0.2",
+      "b": "end",
+      "fin": 0.8,
+      "fout": 1.0
+     }
+    }
+   ],
+   "callouts": [
+    {
+     "cue": 1,
+     "until": "cue:2+0.8",
+     "num": "3",
+     "unit": "年 · 1276 — 1279"
+    }
+   ],
+   "music": [
+    {
+     "until": "cue:2",
+     "mood": "somber",
+     "chord": "Dm",
+     "level": 0.8
+    },
+    {
+     "until": "end",
+     "mood": "resolve",
+     "chord": "D"
+    }
+   ]
+  }
+ ]
+}
