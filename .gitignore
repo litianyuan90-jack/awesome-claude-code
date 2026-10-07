@@ -139,3 +139,6 @@ sync-from-*
 
 .rqs-tmp/
 .myob/
+
+# Skills installed via `npx skills experimental_install` (see skills-lock.json); install globally with -g instead of committing
+.claude/skills/huashu-art-motion/
